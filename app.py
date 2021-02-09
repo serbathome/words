@@ -5,9 +5,9 @@ app = Flask(__name__)
 
 
 def read_word():
-    rand = r.randint(0, 34009)
+    rand = r.randint(0, 1001)
     word = ""
-    file = open("word_rus.txt", encoding="UTF8")
+    file = open("word_rus_short.txt", encoding="UTF8")
     for i, line in enumerate(file):
         if i == rand:
             word = line
