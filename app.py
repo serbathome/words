@@ -23,6 +23,8 @@ file.close()
 
 
 def scramble_word(word):
+    if len(word) == 0:
+        return ""
     scramble = word
     l = list(word)
     while scramble == word:
