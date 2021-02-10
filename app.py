@@ -22,17 +22,6 @@ for i, word in enumerate(file):
 file.close()
 
 
-def read_word():
-    rand = r.randint(0, 1001)
-    word = ""
-    file = open("word_rus_short.txt", encoding="UTF8")
-    for i, line in enumerate(file):
-        if i == rand:
-            word = line
-    file.close()
-    return word.rstrip('\n')
-
-
 def scramble_word(word):
     scramble = word
     l = list(word)
