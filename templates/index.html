@@ -27,6 +27,9 @@
                         var jsonResponse = JSON.parse(xhr.responseText);
                         document.getElementById("scramble").innerHTML = jsonResponse.scramble;
                         document.getElementById("word").innerHTML = jsonResponse.word;
+                        document.getElementById("answer").value = "";
+                        document.getElementById("answer").style.backgroundColor = "white";
+
                     }
                 };
             }
@@ -35,11 +38,24 @@
             function SetLevelMedium() { level = 2; }
             function SetLevelHard() { level = 3; }
 
+            function CheckAnswer() {
+                var answer = document.getElementById("word").innerText
+                var UserInput = document.getElementById("answer").value;
+                if (UserInput.toLocaleLowerCase() != answer.toLowerCase()) {
+                    document.getElementById("answer").style.backgroundColor = "pink";
+                }
+                else {
+                    document.getElementById("answer").style.backgroundColor = "white";
+                }
+
+            }
+
             // assign handlers
             document.getElementById("next").onclick = GetNextWord;
             document.getElementById("btnradio1").onclick = SetLevelEasy;
             document.getElementById("btnradio2").onclick = SetLevelMedium;
             document.getElementById("btnradio3").onclick = SetLevelHard;
+            document.getElementById("answer").onkeyup = CheckAnswer;
 
         });
 
@@ -77,6 +93,15 @@
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#answerModal">Показать
                     ответ</button>
             </div>
+        </div>
+        <div class="row text-center align-items-center pt-1">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="input-group input-group-lg mb-3">
+                    <input id="answer" type="text" class="form-control" placeholder="Ответ">
+                </div>
+            </div>
+            <div class="col-sm"></div>
         </div>
     </div>
 
