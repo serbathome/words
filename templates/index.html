@@ -41,8 +41,11 @@
             function CheckAnswer() {
                 var answer = document.getElementById("word").innerText
                 var UserInput = document.getElementById("answer").value;
-                if (UserInput.toLocaleLowerCase() != answer.toLowerCase()) {
+                if (UserInput.toLocaleLowerCase() != answer.toLowerCase() && UserInput.length == answer.length) {
                     document.getElementById("answer").style.backgroundColor = "pink";
+                }
+                else if (UserInput.toLocaleLowerCase() == answer.toLowerCase() && UserInput.length == answer.length) {
+                    document.getElementById("answer").style.backgroundColor = "lime";
                 }
                 else {
                     document.getElementById("answer").style.backgroundColor = "white";
