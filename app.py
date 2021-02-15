@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify
 import random as r
+import csv
 
 app = Flask(__name__)
 
@@ -10,16 +11,30 @@ words["medium"] = []
 words["hard"] = []
 
 # load words
-file = open("word_rus_short.txt", encoding="UTF8")
-for i, word in enumerate(file):
-    word = word.rstrip('\n')
-    if len(word) <= 4:
-        words["easy"].append(word)
-    if len(word) >= 5 and len(word) <= 8:
-        words["medium"].append(word)
-    if len(word) > 8:
-        words["hard"].append(word)
-file.close()
+# file = open("word_rus_short.txt", encoding="UTF8")
+# for i, word in enumerate(file):
+#    word = word.rstrip('\n')
+#    if len(word) <= 4:
+#        words["easy"].append(word)
+#    if len(word) >= 5 and len(word) <= 8:
+#        words["medium"].append(word)
+#    if len(word) > 8:
+#        words["hard"].append(word)
+# file.close()
+
+
+# load words (russian and english)
+with open('words.csv', newline='\n', encoding="UTF8") as csvfile:
+    wordreader = csv.reader(csvfile, delimiter=';')
+    for row in wordreader:
+        rus = row[0]
+        eng = row[1]
+        if len(rus) <= 4:
+            words["easy"].append((rus, eng))
+        if len(rus) >= 5 and len(rus) <= 8:
+            words["medium"].append((rus, eng))
+        if len(rus) > 8:
+            words["hard"].append((rus, eng))
 
 
 def scramble_word(word):
@@ -36,9 +51,10 @@ def scramble_word(word):
 @app.route('/')
 def index():
     rand = r.randint(0, len(words["medium"]))
-    word = words["medium"][rand]
+    word = words["medium"][rand][0]
+    eng = words["medium"][rand][1]
     scrable = scramble_word(word)
-    result = {"word": word, "scramble": scrable}
+    result = {"word": word, "scramble": scrable, "eng": eng}
     return render_template("index.html", result=result)
 
 
@@ -46,15 +62,19 @@ def index():
 def next(level):
     l = int(level)
     word = ""
+    eng = ""
     if l == 1:
         rand = r.randint(0, len(words["easy"]))
-        word = words["easy"][rand]
+        word = words["easy"][rand][0]
+        eng = words["easy"][rand][1]
     if l == 2:
         rand = r.randint(0, len(words["medium"]))
-        word = words["medium"][rand]
+        word = words["medium"][rand][0]
+        eng = words["medium"][rand][1]
     if l == 3:
         rand = r.randint(0, len(words["hard"]))
-        word = words["hard"][rand]
+        word = words["hard"][rand][0]
+        eng = words["hard"][rand][1]
     scramble = scramble_word(word)
-    result = {"word": word, "scramble": scramble}
+    result = {"word": word, "scramble": scramble, "eng": eng}
     return jsonify(result)

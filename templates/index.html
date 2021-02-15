@@ -27,6 +27,7 @@
                         var jsonResponse = JSON.parse(xhr.responseText);
                         document.getElementById("scramble").innerHTML = jsonResponse.scramble;
                         document.getElementById("word").innerHTML = jsonResponse.word;
+                        document.getElementById("eng").innerHTML = `(*eng. ${jsonResponse.eng})`;
                         document.getElementById("answer").value = "";
                         document.getElementById("answer").style.backgroundColor = "white";
 
@@ -118,6 +119,7 @@
                 </div>
                 <div class="modal-body">
                     <h1 id="word" class="display-1">{{ result.word }}</h1>
+                    <h4 id="eng">(*eng. {{ result.eng }})</h4>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
