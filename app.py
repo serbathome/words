@@ -10,19 +10,6 @@ words["easy"] = []
 words["medium"] = []
 words["hard"] = []
 
-# load words
-# file = open("word_rus_short.txt", encoding="UTF8")
-# for i, word in enumerate(file):
-#    word = word.rstrip('\n')
-#    if len(word) <= 4:
-#        words["easy"].append(word)
-#    if len(word) >= 5 and len(word) <= 8:
-#        words["medium"].append(word)
-#    if len(word) > 8:
-#        words["hard"].append(word)
-# file.close()
-
-
 # load words (russian and english)
 with open('words.csv', newline='\n', encoding="UTF8") as csvfile:
     wordreader = csv.reader(csvfile, delimiter=';')
