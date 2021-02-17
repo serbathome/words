@@ -10,16 +10,13 @@
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-
             // define global vars
             var level = 2; // default level is medium
-
             // define functions
             function GetNextWord() {
                 let xhr = new XMLHttpRequest();
                 xhr.open("GET", "/next/" + level);
                 xhr.send();
-
                 xhr.onload = function () {
                     if (xhr.status != 200) {
                         alert(`Ошибка ${xhr.status}: ${xhr.statusText}`);
@@ -30,15 +27,12 @@
                         document.getElementById("eng").innerHTML = `(*eng. ${jsonResponse.eng})`;
                         document.getElementById("answer").value = "";
                         document.getElementById("answer").style.backgroundColor = "white";
-
                     }
                 };
             }
-
             function SetLevelEasy() { level = 1; }
             function SetLevelMedium() { level = 2; }
             function SetLevelHard() { level = 3; }
-
             function CheckAnswer() {
                 var answer = document.getElementById("word").innerText
                 var UserInput = document.getElementById("answer").value;
@@ -51,18 +45,14 @@
                 else {
                     document.getElementById("answer").style.backgroundColor = "white";
                 }
-
             }
-
             // assign handlers
             document.getElementById("next").onclick = GetNextWord;
             document.getElementById("btnradio1").onclick = SetLevelEasy;
             document.getElementById("btnradio2").onclick = SetLevelMedium;
             document.getElementById("btnradio3").onclick = SetLevelHard;
             document.getElementById("answer").onkeyup = CheckAnswer;
-
         });
-
     </script>
 </head>
 
